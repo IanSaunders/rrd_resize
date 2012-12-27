@@ -30,8 +30,7 @@ foreach($files as $id => $file_path) {
 			rename($new_file,  $file_path);
 			chmod($file_path, 0644); //File created with 600 permissions, update so that APACHE can read
 		} 
-		die;
-		//rename(oldname, newname);
+		//die;
 	}
 }
 
