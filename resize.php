@@ -6,6 +6,8 @@ $files = find('.', '*.rrd');
 
 foreach($files as $id => $file_path) {
   $info = rrd_info($file_path);
+  	//The 2 is the RRA number (so the ID of the RRDB you want to update)
+  	//use rrdtool info to view RRD File meta-data and update as needed
 	$row_count = $info['rra[2].rows'];
 	if($row_count == 9216) {
 
@@ -13,7 +15,7 @@ foreach($files as $id => $file_path) {
 		$path = substr($file_path, 0, $ix);
 		$file_name = substr($file_path, $ix + 1);
 		echo  "row count => $row_count ($path => $file_name)\n";
-		$target_rows = 18432; //64 days
+		$target_rows = 18432; //64 days @ 5min resolution
 		$row_diff = $target_rows - $row_count;
 
 		if($row_diff > 0) {
